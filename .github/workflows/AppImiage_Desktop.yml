@@ -3,10 +3,11 @@ name: Build AppImage
 on:
   push:
     branches:
-      - main
+      - retrodeck-main
   pull_request:
     branches:
-      - main
+      - retrodeck-main
+  workflow_dispatch:
 
 jobs:
   build:

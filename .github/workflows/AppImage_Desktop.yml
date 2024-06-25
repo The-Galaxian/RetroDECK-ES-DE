@@ -1,4 +1,4 @@
-name: Build AppImage
+name: Build ES-DE AppImage for RetroDeck
 
 on:
   push:
@@ -60,7 +60,7 @@ jobs:
 
             if [ $(grep PKG_PIPEWIRE_VERSION:INTERNAL= CMakeCache.txt) = "PKG_PIPEWIRE_VERSION:INTERNAL=" ]; then
               echo "The SDL library is not configured with PipeWire support, aborting. Check this?"
-              : # exit 1
+              exit 1
             fi
 
             make -j4
@@ -96,11 +96,11 @@ jobs:
           ./linuxdeploy-x86_64.AppImage -l /lib/x86_64-linux-gnu/libOpenGL.so.0 -l /lib/x86_64-linux-gnu/libGLdispatch.so.0 -l /lib/x86_64-linux-gnu/libgio-2.0.so.0 --appdir AppDir
           cp external/SDL/build/libSDL2-2.0.so.0 AppDir/usr/lib/libSDL2-2.0.so.0
           ./appimagetool-x86_64.AppImage AppDir
-          mv ES-DE-x86_64.AppImage RD-ES-DE_x64.AppImage
+          mv ES-DE-x86_64.AppImage ES-DE-RD_x64.AppImage
           echo "Created AppImage ES-DE_x64.AppImage"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: RD-ES-DE_x64.AppImage
-          path: RD-ES-DE_x64.AppImage
+          name: ES-DE-RD_x64.AppImage
+          path: ES-DE-RD_x64.AppImage
